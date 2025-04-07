@@ -40,6 +40,10 @@ hooks:
         
         NODE_VERSION=22 symfony-build
 
+        mkdir -p var/jwt
+
+        php bin/console lexik:jwt:generate-keypair --skip-if-exists --no-interaction --no-debug
+
     deploy: |
         set -x -e
 
