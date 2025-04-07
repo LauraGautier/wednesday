@@ -1,0 +1,129 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des Offres{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        background-color: #f4f6f9;
+        font-family: 'Arial', sans-serif;
+    }
+    .container {
+        max-width: 1200px;
+        margin: 3em auto;
+        padding: 3em;
+        background-color: #ffffff;
+        border-radius: 12px;
+        box-shadow: 0 6px 12px rgba(0, 0, 0, 0.1);
+    }
+    h1 {
+        font-size: 2.4em;
+        margin-bottom: 1em;
+        color: #333;
+        text-align: center;
+        font-weight: bold;
+    }
+    .btn {
+        padding: 12px 20px;
+        margin: 10px 5px;
+        border-radius: 25px;
+        text-decoration: none;
+        color: #fff;
+        background-color: #007bff;
+        transition: background-color 0.3s ease, transform 0.2s ease;
+    }
+    .btn-primary {
+        background-color: #28a745;
+    }
+    .btn-danger {
+        background-color: #d9534f;
+    }
+    .btn-warning {
+        background-color: #f0ad4e;
+    }
+    .btn:hover {
+        background-color: #000000;
+        transform: scale(1.05);
+    }
+    .offers-list {
+        margin-top: 3em;
+    }
+    .offer-card {
+        background: #ffffff;
+        padding: 2em;
+        border-radius: 15px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+        margin-bottom: 2em;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .offer-card:hover {
+        transform: translateY(-8px);
+        box-shadow: 0 6px 18px rgba(0, 0, 0, 0.2);
+    }
+    .offer-title {
+        font-size: 1.8em;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 0.6em;
+    }
+    .offer-description {
+        font-size: 1.2em;
+        color: #555;
+        margin-bottom: 1.2em;
+    }
+    .offer-tags {
+        font-size: 1.2em;
+        color: #007bff;
+        font-weight: bold;
+        margin-top: 1.2em;
+    }
+    .offer-city {
+        font-size: 1.2em;
+        margin-top: 1.2em;
+        font-weight: bold;
+    }
+    .no-offers {
+        text-align: center;
+        color: #888;
+        font-size: 1.4em;
+        margin-top: 2em;
+    }
+    .text-center {
+        text-align: center;
+    }
+    .offer-actions {
+        text-align: right;
+        margin-top: 1em;
+    }
+</style>
+
+<div class="container">
+    <h1>Liste des Offres</h1>
+    <div class="text-center">
+        <a class="btn btn-primary" href="{{ path('app_add_offer') }}">Ajouter une offre</a>
+        <a class="btn btn-danger" href="{{ path('app_logout') }}">Déconnexion</a>
+    </div>
+    
+    <div class="offers-list">
+        {% if offers is empty %}
+            <div class="no-offers">Aucune offre disponible pour le moment.</div>
+        {% else %}
+            {% for offer in offers %}
+<div class="offer-card">
+    {{ offer.createdAt|date('d/m/Y') }}
+    {{ offer.updatedAt|date('d/m/Y') }}
+    <div class="offer-title">{{ offer.title }}</div>
+    <div class="offer-description">{{ offer.description }}</div>
+    <div class="offer-tags">{{ offer.tags }}</div>
+    <div class="offer-city">{{ offer.city }}</div>
+    <div class="offer-actions">
+        <a class="btn btn-warning" href="{{ path('app_edit_offer', {'id': offer.id}) }}">Editer</a>
+        <a class="btn btn-danger" href="{{ path('app_delete_offer', {'id': offer.id}) }}">Supprimer</a>
+    </div>
+</div>
+
+            {% endfor %}
+        {% endif %}
+    </div>
+</div>
+{% endblock %}
