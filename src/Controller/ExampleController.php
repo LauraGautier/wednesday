@@ -14,7 +14,7 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class ExampleController extends AbstractController
 {
-    #[Route('/offers', name:'app_offers')]
+    #[Route('/', name:'app_offers')]
     public function index(EntityManagerInterface $entityManager): Response
     {
         // Récupérer l'utilisateur actuellement connecté
